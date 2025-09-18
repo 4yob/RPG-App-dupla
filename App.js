@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import {
   SafeAreaView,
-  View,           
-  Text,           
-  TextInput,      
-  TouchableOpacity, 
-  FlatList,       
-  StyleSheet,     
-  Alert,          
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Alert,
 } from "react-native";
-import Header from './components/header/Header.js';
+import Header from "./components/header/header.js";
+import AddCharacterForm from "./components/addCharacterForm/addCharacterForm.js";
+import Button from "./components/button/button.js";
 import { StatusBar } from "expo-status-bar";
 import CharacterCard from "./components/CharacterCard/page.js";
 
@@ -17,7 +18,7 @@ export default function App() {
   const [characters, setCharacters] = useState([
     { id: 1, name: "🧙‍♂️ Gandalf o Mago", recruited: 0 },
     { id: 2, name: "⚔️ Aragorn o Guerreiro", recruited: 1 },
-    { id: 3, name: "🏹 Legolas o Arqueiro", recruited: 0 }
+    { id: 3, name: "🏹 Legolas o Arqueiro", recruited: 0 },
   ]);
 
   const [newCharacter, setNewCharacter] = useState("");
@@ -30,7 +31,7 @@ export default function App() {
     const newCharacterObj = {
       id: newId,
       name: newCharacter,
-      recruited: 0
+      recruited: 0,
     };
 
     const newList = [newCharacterObj];
@@ -51,7 +52,7 @@ export default function App() {
         newCharacters.push({
           id: currentChar.id,
           name: currentChar.name,
-          recruited: newStatus
+          recruited: newStatus,
         });
       } else {
         newCharacters.push(currentChar);
@@ -74,8 +75,8 @@ export default function App() {
             }
           }
           setCharacters(newList);
-        }
-      }
+        },
+      },
     ]);
   }
 
@@ -86,12 +87,15 @@ export default function App() {
         onPress={() => toggleRecruit(item)}
         onLongPress={() => removeCharacter(item)}
       >
-        <Text style={[styles.characterText, item.recruited && styles.characterRecruitedText]}>
+        <Text
+          style={[
+            styles.characterText,
+            item.recruited && styles.characterRecruitedText,
+          ]}
+        >
           {item.name}
         </Text>
-        <Text style={styles.status}>
-          {item.recruited ? "⭐" : "💤"}
-        </Text>
+        <Text style={styles.status}>{item.recruited ? "⭐" : "💤"}</Text>
       </TouchableOpacity>
     );
   }
@@ -100,19 +104,19 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
 
-      <Header title="🏰 Minha Party RPG" subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"/>
+      <Header
+        title="🏰 Minha Party RPG"
+        subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"
+      />
 
       <View style={styles.inputRow}>
-        <TextInput
-          style={styles.input}
+        <AddCharacterForm
           placeholder="🎭 Nome do novo personagem"
           value={newCharacter}
           onChangeText={setNewCharacter}
           onSubmitEditing={addCharacter}
         />
-        <TouchableOpacity style={styles.button} onPress={addCharacter}>
-          <Text style={styles.buttonText}>⚔️</Text>
-        </TouchableOpacity>
+        <Button text="⚔️" onPress={addCharacter} />
       </View>
 
       <CharacterCard
@@ -125,15 +129,10 @@ export default function App() {
   );
 }
 
-
-
-
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A0E0A',
+    backgroundColor: "#1A0E0A",
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
@@ -141,32 +140,6 @@ const styles = StyleSheet.create({
   inputRow: {
     flexDirection: "row",
     marginBottom: 20,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 2,
-    borderColor: "#E69A28",
-    borderRadius: 8,
-    padding: 12,
-    backgroundColor: '#F4E4BC',
-    color: "#1A0E0A",
-    fontSize: 16,
-  },
-  button: {
-    backgroundColor: "#C5282F",
-    padding: 12,
-    borderRadius: 8,
-    marginLeft: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    width: 50,
-    borderWidth: 2,
-    borderColor: "#E69A28",
-  },
-  buttonText: {
-    color: "#E69A28",
-    fontSize: 18,
-    fontWeight: "bold",
   },
   list: {
     flex: 1,

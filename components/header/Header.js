@@ -1,31 +1,31 @@
 import React from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function Header({ title, subtitle }) {
-    return (
-        <View style={styles.header}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subtitle}</Text>
-        </View>
-    );
+  return (
+    <View style={styles.header}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.subtitle}>{subtitle}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    title: {
+  header: {
+    paddingVertical: 12,
+    marginBottom: 16,
+  },
+  title: {
     fontSize: 28,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 8,
-    color: '#E69A28',
+    color: "#E69A28",
   },
   subtitle: {
     fontSize: 12,
     textAlign: "center",
     marginBottom: 20,
-    color: '#C5282F',
+    color: "#C5282F",
   },
 });
