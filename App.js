@@ -9,6 +9,7 @@ import {
   StyleSheet,     
   Alert,          
 } from "react-native";
+import Header from "/components/header/Header.js";
 import { StatusBar } from "expo-status-bar";
 
 export default function App() {
@@ -98,10 +99,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
 
-      <Text style={styles.title}>🏰 Minha Party RPG</Text>
-      <Text style={styles.subtitle}>
-        ⭐ Recrutado • 💤 Disponível • Segure para remover
-      </Text>
+      <Header title="🏰 Minha Party RPG" subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"/>
 
       <View style={styles.inputRow}>
         <TextInput
@@ -138,19 +136,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 8,
-    color: '#E69A28',
-  },
-  subtitle: {
-    fontSize: 12,
-    textAlign: "center",
-    marginBottom: 20,
-    color: '#C5282F',
   },
   inputRow: {
     flexDirection: "row",
