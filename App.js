@@ -12,6 +12,7 @@ import Header from "./components/header/header.js";
 import AddCharacterForm from "./components/addCharacterForm/addCharacterForm.js";
 import Button from "./components/button/button.js";
 import { StatusBar } from "expo-status-bar";
+import CharacterCard from "./components/CharacterCard/page.js";
 
 export default function App() {
   const [characters, setCharacters] = useState([
@@ -118,12 +119,12 @@ export default function App() {
         <Button text="⚔️" onPress={addCharacter} />
       </View>
 
-      <FlatList
+      <CharacterCard
         data={characters}
         keyExtractor={(item) => String(item.id)}
         renderItem={renderCharacter}
-        style={styles.list}
       />
+
     </SafeAreaView>
   );
 }
