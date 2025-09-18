@@ -9,8 +9,9 @@ import {
   StyleSheet,     
   Alert,          
 } from "react-native";
-import Header from "/components/header/Header.js";
+import Header from './components/header/Header.js';
 import { StatusBar } from "expo-status-bar";
+import CharacterCard from "./components/CharacterCard/page.js";
 
 export default function App() {
   const [characters, setCharacters] = useState([
@@ -114,12 +115,12 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
-      <FlatList
+      <CharacterCard
         data={characters}
         keyExtractor={(item) => String(item.id)}
         renderItem={renderCharacter}
-        style={styles.list}
       />
+
     </SafeAreaView>
   );
 }
