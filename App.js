@@ -27,11 +27,12 @@ export default function App() {
   function addCharacter() {
     if (newCharacter === "") return;
 
+    const nomePersonagem = newCharacter;
     const newId = characters.length + 1;
 
     const newCharacterObj = {
       id: newId,
-      name: newCharacter,
+      name: nomePersonagem,
       recruited: 0,
     };
 
@@ -40,6 +41,10 @@ export default function App() {
 
     setCharacters(allCharacters);
     setNewCharacter("");
+    Toast.show(`Personagem "${nomePersonagem}" adicionado!`, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+  });
   }
 
   function toggleRecruit(character) {
@@ -102,87 +107,80 @@ export default function App() {
     );
   }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="light" />
 
-      <Header
-        title="🏰 Minha Party RPG"
-        subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"
-      />
-
-      <View style={styles.inputRow}>
-        <AddCharacterForm
-          placeholder="🎭 Nome do novo personagem"
-          value={newCharacter}
-          onChangeText={setNewCharacter}
-          onSubmitEditing={addCharacter}
+        <Header
+          title="🏰 Minha Party RPG"
+          subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"
         />
-        <Button text="⚔️" onPress={addCharacter} />
-      </View>
 
-      <CharacterCard
-        data={characters}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={renderCharacter}
-      />
+        <View style={styles.inputRow}>
+          <AddCharacterForm
+            placeholder="🎭 Nome do novo personagem"
+            value={newCharacter}
+            onChangeText={setNewCharacter}
+            onSubmitEditing={addCharacter}
+          />
+          <Button text="⚔️" onPress={addCharacter}/>
+        </View>
 
-      <ConfirmationModal
-        visible={modalVisible}
-        character={characterToRemove}
-        onConfirm={confirmRemove}
-        onCancel={cancelRemove}
-      />
+        <CharacterCard
+          data={characters}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={renderCharacter}
+        />
 
-    </SafeAreaView>
-  );
-}
+      </SafeAreaView>
+    );
+  }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1A0E0A",
-    paddingTop: 50,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-  inputRow: {
-    flexDirection: "row",
-    marginBottom: 20,
-  },
-  list: {
-    flex: 1,
-  },
-  character: {
-    backgroundColor: "#2C1810",
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#58180D",
-  },
-  characterRecruited: {
-    backgroundColor: "#58180D",
-    borderColor: "#E69A28",
-    borderWidth: 2,
-  },
-  characterText: {
-    flex: 1,
-    fontSize: 16,
-    color: "#F4E4BC",
-    fontWeight: "500",
-  },
-  characterRecruitedText: {
-    color: "#E69A28",
-    fontWeight: "bold",
-  },
-  status: {
-    fontSize: 20,
-    marginLeft: 10,
-  },
-});
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#050A30",
+      paddingTop: 50,
+      paddingHorizontal: 20,
+      paddingBottom: 20,
+      paddingLeft: 20,
+      paddingRight: 20
+    },
+    inputRow: {
+      flexDirection: "row",
+      marginBottom: 20,
+    },
+    list: {
+      flex: 1,
+    },
+    character: {
+      backgroundColor: "#BFD7ED",
+      padding: 15,
+      borderRadius: 8,
+      marginBottom: 10,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      borderWidth: 1,
+      borderColor: "#0C2D48",
+    },
+    characterRecruited: {
+      backgroundColor: "#145DA0",
+      borderColor: "#0C2D48",
+      borderWidth: 2,
+    },
+    characterText: {
+      flex: 1,
+      fontSize: 16,
+      color: "#000000ff",
+      fontWeight: "500",
+    },
+    characterRecruitedText: {
+      color: "#ffffffff",
+      fontWeight: "bold",
+    },
+    status: {
+      fontSize: 20,
+      marginLeft: 10,
+    },
+  });
