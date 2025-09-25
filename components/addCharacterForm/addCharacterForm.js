@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         borderWidth: 2,
-        borderColor: "#E69A28",
+        borderColor: "0C2D48",
         borderRadius: 8,
         padding: 12,
-        backgroundColor: "#F4E4BC",
+        backgroundColor: "#D9E4EC",
         color: "#1A0E0A",
         fontSize: 16,
     },
