@@ -6,6 +6,7 @@ export default function AddCharacterForm({ placeholder, value, onChangeText, onS
         <TextInput
             style={styles.input}
             placeholder={placeholder}
+            placeholderTextColor="#222222ff"
             value={value}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
@@ -17,10 +18,10 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         borderWidth: 2,
-        borderColor: "0C2D48",
+        borderColor: "#145DA0",
         borderRadius: 8,
         padding: 12,
-        backgroundColor: "#D9E4EC",
+        backgroundColor: "#fff",
         color: "#1A0E0A",
         fontSize: 16,
     },
