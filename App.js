@@ -4,15 +4,14 @@ import {
   View,
   Text,
   TouchableOpacity,
-  FlatList,
   StyleSheet,
-  Alert,
 } from "react-native";
-import Header from "./components/header/Header.js";
+import Header from "./components/header/header.js";
 import AddCharacterForm from "./components/addCharacterForm/addCharacterForm.js";
 import Button from "./components/button/button.js";
 import { StatusBar } from "expo-status-bar";
-import CharacterCard from "./components/CharacterCard/page.js";
+import CharacterCard from "./components/CharacterCard/characterCard.js";
+import ConfirmationModal from "./components/confirmationModal/confirmationModal.js";
 
 export default function App() {
   const [characters, setCharacters] = useState([
@@ -22,6 +21,8 @@ export default function App() {
   ]);
 
   const [newCharacter, setNewCharacter] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [characterToRemove, setCharacterToRemove] = useState(null);
 
   function addCharacter() {
     if (newCharacter === "") return;
@@ -68,21 +69,22 @@ export default function App() {
   }
 
   function removeCharacter(character) {
-    Alert.alert("Remover Personagem", `Remover "${character.name}" da party?`, [
-      { text: "Cancelar" },
-      {
-        text: "Remover",
-        onPress: () => {
-          const newList = [];
-          for (let i = 0; i < characters.length; i++) {
-            if (characters[i].id !== character.id) {
-              newList.push(characters[i]);
-            }
-          }
-          setCharacters(newList);
-        },
-      },
-    ]);
+    setCharacterToRemove(character);
+    setModalVisible(true);
+  }
+
+  function confirmRemove() {
+    if (characterToRemove) {
+      const newList = characters.filter(char => char.id !== characterToRemove.id);
+      setCharacters(newList);
+    }
+    setCharacterToRemove(null);
+    setModalVisible(false);
+  }
+
+  function cancelRemove() {
+    setModalVisible(false);
+    setCharacterToRemove(null);
   }
 
   function renderCharacter({ item }) {
