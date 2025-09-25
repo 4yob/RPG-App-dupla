@@ -7,6 +7,20 @@ export default function CharacterCard({ data, keyExtractor, renderItem }) {
             data={data}
             keyExtractor={keyExtractor}
             renderItem={renderItem}
+            style={styles.list}
+            contentContainerStyle={styles.contentContainer}
+            showsVerticalScrollIndicator={false}
         />
     )
 }
+
+const styles = StyleSheet.create({
+    list: {
+        flex: 1,
+        paddingHorizontal: 5,
+    },
+    contentContainer: {
+        paddingBottom: 30,
+        paddingTop: 10,
+    },
+});

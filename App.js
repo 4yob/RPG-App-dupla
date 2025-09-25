@@ -23,6 +23,7 @@ export default function App() {
   const [newCharacter, setNewCharacter] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [characterToRemove, setCharacterToRemove] = useState(null);
+  const [filter, setFilter] = useState("all");
 
   function addCharacter() {
     if (newCharacter === "") return;
@@ -107,80 +108,164 @@ export default function App() {
     );
   }
 
-    return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar style="light" />
-
-        <Header
-          title="🏰 Minha Party RPG"
-          subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"
-        />
-
-        <View style={styles.inputRow}>
-          <AddCharacterForm
-            placeholder="🎭 Nome do novo personagem"
-            value={newCharacter}
-            onChangeText={setNewCharacter}
-            onSubmitEditing={addCharacter}
-          />
-          <Button text="⚔️" onPress={addCharacter}/>
-        </View>
-
-        <CharacterCard
-          data={characters}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={renderCharacter}
-        />
-
-      </SafeAreaView>
-    );
+  function getRecruitedCharacters() {
+    if (filter === "recruited") {
+      return characters.filter(character => character.recruited === 1);
+    } else if (filter === "available") {
+      return characters.filter(character => character.recruited === 0);
+    }
+    return characters;
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#050A30",
-      paddingTop: 50,
-      paddingHorizontal: 20,
-      paddingBottom: 20,
-      paddingLeft: 20,
-      paddingRight: 20
-    },
-    inputRow: {
-      flexDirection: "row",
-      marginBottom: 20,
-    },
-    list: {
-      flex: 1,
-    },
-    character: {
-      backgroundColor: "#BFD7ED",
-      padding: 15,
-      borderRadius: 8,
-      marginBottom: 10,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      borderWidth: 1,
-      borderColor: "#0C2D48",
-    },
-    characterRecruited: {
-      backgroundColor: "#145DA0",
-      borderColor: "#0C2D48",
-      borderWidth: 2,
-    },
-    characterText: {
-      flex: 1,
-      fontSize: 16,
-      color: "#000000ff",
-      fontWeight: "500",
-    },
-    characterRecruitedText: {
-      color: "#ffffffff",
-      fontWeight: "bold",
-    },
-    status: {
-      fontSize: 20,
-      marginLeft: 10,
-    },
-  });
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="light" />
+
+      <Header
+        title="🏰 Minha Party RPG"
+        subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"
+      />
+
+      <View style={styles.inputRow}>
+        <AddCharacterForm
+          placeholder="🎭 Nome do novo personagem"
+          value={newCharacter}
+          onChangeText={setNewCharacter}
+          onSubmitEditing={addCharacter}
+        />
+        <Button text="⚔️" onPress={addCharacter} />
+      </View>
+
+      <View style={styles.filterRow}>
+        <TouchableOpacity
+          style={[styles.filterButton, filter === "all" && styles.filterButtonActive]}
+          onPress={() => setFilter("all")}
+          >
+            <Text style={[styles.filterText, filter === "all" && styles.filterTextActive]}>
+              🎭 Todos
+            </Text>
+          </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.filterButton, filter === "recruited" && styles.filterButtonActive]}
+          onPress={() => setFilter("recruited")}
+          >
+            <Text style={[styles.filterText, filter === "recruited" && styles.filterTextActive]}>
+              ⭐ Recrutados
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+          style={[styles.filterButton, filter === "available" && styles.filterButtonActive]}
+          onPress={() => setFilter("available")}
+          >
+            <Text style={[styles.filterText, filter === "available" && styles.filterTextActive]}>
+              💤 Disponíveis
+            </Text>
+          </TouchableOpacity>
+      </View>
+
+      <CharacterCard
+        data={getRecruitedCharacters()}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={renderCharacter}
+      />
+
+      <ConfirmationModal
+        visible={modalVisible}
+        character={characterToRemove}
+        onConfirm={confirmRemove}
+        onCancel={cancelRemove}
+      />
+
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#1A0E0A",
+    paddingTop: 60,
+    paddingHorizontal: 25,
+    paddingBottom: 30,
+  },
+  inputRow: {
+    flexDirection: "row",
+    marginBottom: 25,
+    marginTop: 10,
+    marginHorizontal: 5,
+    paddingHorizontal: 5,
+  },
+  filterRow: {
+    flexDirection: "row",
+    marginBottom: 25,
+    marginHorizontal: 5,
+    gap: 12,
+  },
+  filterButton: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: "#2C1810",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#58180D",
+    minHeight: 44,
+    marginHorizontal: 2,
+  },
+  filterButtonActive: {
+    backgroundColor: "#58180D",
+    borderColor: "#E69A28",
+    borderWidth: 2,
+  },
+  filterText: {
+    fontSize: 14,
+    color: "#F4E4BC",
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  filterTextActive: {
+    color: "#E69A28",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  list: {
+    flex: 1,
+  },
+  character: {
+    backgroundColor: "#2C1810",
+    padding: 18,
+    borderRadius: 10,
+    marginBottom: 12,
+    marginHorizontal: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#58180D",
+    minHeight: 65,
+  },
+  characterRecruited: {
+    backgroundColor: "#58180D",
+    borderColor: "#E69A28",
+    borderWidth: 2,
+  },
+  characterText: {
+    flex: 1,
+    fontSize: 16,
+    color: "#F4E4BC",
+    fontWeight: "500",
+  },
+  characterRecruitedText: {
+    color: "#E69A28",
+    fontWeight: "bold",
+  },
+  status: {
+    fontSize: 20,
+    marginLeft: 15,
+    minWidth: 35,
+  },
+});
