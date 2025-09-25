@@ -60,30 +60,30 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modalContent: {
-        backgroundColor: '#2C1810',
+        backgroundColor: '#050A30',
         borderRadius: 12,
         padding: 20,
         margin: 20,
         borderWidth: 2,
-        borderColor: '#58180D',
+        borderColor: '#145DA0',
     },
     modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#E69A28',
+        color: '#BFD7ED',
         textAlign: 'center',
         marginBottom: 15,
     },
     modalText: {
         fontSize: 16,
-        color: '#F4E4BC',
+        color: '#fff',
         textAlign: 'center',
         marginBottom: 20,
         lineHeight: 24,
     },
     characterName: {
         fontWeight: 'bold',
-        color: '#E69A28',
+        color: '#2871c5ff',
     },
     modalButtons: {
         flexDirection: 'row',
@@ -98,13 +98,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cancelButton: {
-        backgroundColor: '#4A4A4A',
+        backgroundColor: '#BFD7ED',
     },
     confirmButton: {
-        backgroundColor: '#D32F2F',
+        backgroundColor: '#A82810',
     },
     cancelButtonText: {
-        color: '#F4E4BC',
+        color: '#000000ff',
         fontSize: 16,
         fontWeight: '600',
     },

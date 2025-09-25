@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import Header from "./components/header/Header.js";
+import Header from "./components/header/header.js";
 import AddCharacterForm from "./components/addCharacterForm/addCharacterForm.js";
 import Button from "./components/button/button.js";
 import { StatusBar } from "expo-status-bar";
@@ -129,12 +129,17 @@ export default function App() {
         title={
           <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
             <MaterialIcons name="castle" size={30} color="gray" />
-            <Text style={{ marginLeft: 8, color: "#fff", fontSize: 20 }}>Minha Party RPG</Text>
+            <Text style={{ marginLeft: 8, color: "#fff", fontSize: 20 }}>Nossa Party RPG</Text>
           </View>
         }
         subtitle={
           <Text style={styles.subtitle}>
             <Entypo name="star" size={16} color="yellow" />  Recrutado •  <MaterialCommunityIcons name="sleep" size={16} color="gray" />  Disponível • Segure para remover
+          </Text>
+        }
+        subtitle2={
+          <Text style={styles.subtitle}>
+            Desenvolvido por Alejandra e Bruna
           </Text>
         }
       />
