@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import Header from "./components/header/header.js";
+import Header from "./components/header/Header.js";
 import AddCharacterForm from "./components/addCharacterForm/addCharacterForm.js";
 import Button from "./components/button/button.js";
 import { StatusBar } from "expo-status-bar";
@@ -136,6 +136,8 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20
   },
   inputRow: {
     flexDirection: "row",
