@@ -6,12 +6,16 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import Header from "./components/header/header.js";
+import Header from "./components/header/Header.js";
 import AddCharacterForm from "./components/addCharacterForm/addCharacterForm.js";
 import Button from "./components/button/button.js";
 import { StatusBar } from "expo-status-bar";
 import CharacterCard from "./components/CharacterCard/characterCard.js";
 import ConfirmationModal from "./components/confirmationModal/confirmationModal.js";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Entypo from '@expo/vector-icons/Entypo';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function App() {
   const [characters, setCharacters] = useState([
@@ -43,9 +47,9 @@ export default function App() {
     setCharacters(allCharacters);
     setNewCharacter("");
     Toast.show(`Personagem "${nomePersonagem}" adicionado!`, {
-    duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
-  });
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+    });
   }
 
   function toggleRecruit(character) {
@@ -103,7 +107,7 @@ export default function App() {
         >
           {item.name}
         </Text>
-        <Text style={styles.status}>{item.recruited ? "⭐" : "💤"}</Text>
+        <Text style={styles.status}>{item.recruited ? (<Entypo name="star" size={24} color="yellow" />) : (<MaterialCommunityIcons name="sleep" size={24} color="gray" />)}</Text>
       </TouchableOpacity>
     );
   }
@@ -122,47 +126,59 @@ export default function App() {
       <StatusBar style="light" />
 
       <Header
-        title="🏰 Minha Party RPG"
-        subtitle="⭐ Recrutado • 💤 Disponível • Segure para remover"
+        title={
+          <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+            <MaterialIcons name="castle" size={30} color="gray" />
+            <Text style={{ marginLeft: 8, color: "#fff", fontSize: 20 }}>Minha Party RPG</Text>
+          </View>
+        }
+        subtitle={
+          <Text style={styles.subtitle}>
+            <Entypo name="star" size={16} color="yellow" />  Recrutado •  <MaterialCommunityIcons name="sleep" size={16} color="gray" />  Disponível • Segure para remover
+          </Text>
+        }
       />
 
       <View style={styles.inputRow}>
         <AddCharacterForm
-          placeholder="🎭 Nome do novo personagem"
+          placeholder="Nome do novo personagem"
           value={newCharacter}
           onChangeText={setNewCharacter}
           onSubmitEditing={addCharacter}
         />
-        <Button text="⚔️" onPress={addCharacter} />
+        <Button text={<MaterialCommunityIcons name="sword-cross" size={24} color="gray" />} onPress={addCharacter} />
       </View>
 
       <View style={styles.filterRow}>
         <TouchableOpacity
           style={[styles.filterButton, filter === "all" && styles.filterButtonActive]}
           onPress={() => setFilter("all")}
-          >
-            <Text style={[styles.filterText, filter === "all" && styles.filterTextActive]}>
-              🎭 Todos
-            </Text>
-          </TouchableOpacity>
+        >
+          <FontAwesome6 name="masks-theater" size={24} color="orange" />
+          <Text style={[styles.filterText, filter === "all" && styles.filterTextActive]}>
+            Todos
+          </Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.filterButton, filter === "recruited" && styles.filterButtonActive]}
           onPress={() => setFilter("recruited")}
-          >
-            <Text style={[styles.filterText, filter === "recruited" && styles.filterTextActive]}>
-              ⭐ Recrutados
-            </Text>
-          </TouchableOpacity>
+        >
+          <Entypo name="star" size={24} color="yellow" />
+          <Text style={[styles.filterText, filter === "recruited" && styles.filterTextActive]}>
+            Recrutados
+          </Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity
+        <TouchableOpacity
           style={[styles.filterButton, filter === "available" && styles.filterButtonActive]}
           onPress={() => setFilter("available")}
-          >
-            <Text style={[styles.filterText, filter === "available" && styles.filterTextActive]}>
-              💤 Disponíveis
-            </Text>
-          </TouchableOpacity>
+        >
+          <MaterialCommunityIcons name="sleep" size={24} color="gray" />
+          <Text style={[styles.filterText, filter === "available" && styles.filterTextActive]}>
+            Disponíveis
+          </Text>
+        </TouchableOpacity>
       </View>
 
       <CharacterCard
@@ -190,6 +206,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingBottom: 30,
   },
+  subtitle: {
+    fontSize: 14,
+    marginTop: 4,
+    textAlign: "center",
+  },
   inputRow: {
     flexDirection: "row",
     marginBottom: 25,
@@ -215,22 +236,36 @@ const styles = StyleSheet.create({
     borderColor: "#58180D",
     minHeight: 44,
     marginHorizontal: 2,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 6,
   },
   filterButtonActive: {
     backgroundColor: "#58180D",
     borderColor: "#E69A28",
     borderWidth: 2,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 6,
   },
   filterText: {
     fontSize: 14,
     color: "#F4E4BC",
     fontWeight: "500",
     textAlign: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   filterTextActive: {
     color: "#E69A28",
     fontWeight: "bold",
     textAlign: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   list: {
     flex: 1,
