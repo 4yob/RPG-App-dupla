@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 8,
-    color: "#E69A28",
+    color: "#D4F1F4",
   },
   subtitle: {
     fontSize: 12,
     textAlign: "center",
     marginBottom: 20,
-    color: "#C5282F",
+    color: "#2871c5ff",
   },
 });

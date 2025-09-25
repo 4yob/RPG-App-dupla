@@ -28,11 +28,12 @@ export default function App() {
   function addCharacter() {
     if (newCharacter === "") return;
 
+    const nomePersonagem = newCharacter;
     const newId = characters.length + 1;
 
     const newCharacterObj = {
       id: newId,
-      name: newCharacter,
+      name: nomePersonagem,
       recruited: 0,
     };
 
@@ -41,6 +42,10 @@ export default function App() {
 
     setCharacters(allCharacters);
     setNewCharacter("");
+    Toast.show(`Personagem "${nomePersonagem}" adicionado!`, {
+    duration: Toast.durations.SHORT,
+    position: Toast.positions.BOTTOM,
+  });
   }
 
   function toggleRecruit(character) {
